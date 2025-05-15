@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - Therapy Management</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #222; color: #eee; }
+        .container { max-width: 600px; margin: 60px auto; background: #333; padding: 2em; border-radius: 8px; }
+        a { color: #4CAF50; text-decoration: none; margin-right: 1em; }
+        .logout { float: right; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div style="overflow: auto;">
+            <span>Welcome, {{ user.email }} ({{ user.user_type }})</span>
+            <a href="/logout/" class="logout">Logout</a>
+        </div>
+        <h2>Dashboard</h2>
+        <p>This is a minimal dashboard. You can now build out more features or connect to the API endpoints.</p>
+        <ul>
+            <li><a href="/admin/">Go to Admin Panel</a></li>
+            <li><a href="/api/children/">View Children (API)</a></li>
+            <li><a href="/api/therapists/">View Therapists (API)</a></li>
+            <li><a href="/api/sessions/">View Sessions (API)</a></li>
+        </ul>
+    </div>
+</body>
+</html> 

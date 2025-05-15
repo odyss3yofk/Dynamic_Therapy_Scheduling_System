@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Therapy Management</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #222; color: #eee; }
+        .container { max-width: 400px; margin: 100px auto; background: #333; padding: 2em; border-radius: 8px; }
+        input[type=email], input[type=password] { width: 100%; padding: 0.5em; margin: 0.5em 0; border-radius: 4px; border: none; }
+        button { width: 100%; padding: 0.7em; background: #4CAF50; color: white; border: none; border-radius: 4px; font-size: 1em; }
+        .error { color: #ff6b6b; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="error">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        <form method="post">
+            {% csrf_token %}
+            <label>Email:</label>
+            <input type="email" name="email" required>
+            <label>Password:</label>
+            <input type="password" name="password" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html> 
