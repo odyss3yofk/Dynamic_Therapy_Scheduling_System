@@ -53,18 +53,6 @@
 
 The API uses JWT (JSON Web Tokens) for authentication. To access protected endpoints:
 
-1. Obtain a token:
-```bash
-curl -X POST http://localhost:8000/api/token/ \
-     -H "Content-Type: application/json" \
-     -d '{"email": "user@example.com", "password": "password123"}'
-```
-
-2. Use the token in subsequent requests:
-```bash
-curl http://localhost:8000/api/children/ \
-     -H "Authorization: Bearer <your_token>"
-```
 
 ## Session Scheduling
 
@@ -73,4 +61,8 @@ The system uses PuLP (Python Linear Programming) to automatically assign therapi
 - Session time slots
 - No overlapping sessions
 - Optimal assignment
+
+## Adding therapist and child registration endpoints.
+- Allow parents to register children only if authenticated.
+- Adding email validation and password confirmation.
 
