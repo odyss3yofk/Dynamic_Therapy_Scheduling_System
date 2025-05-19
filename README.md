@@ -1,37 +1,11 @@
 # Therapy Management System API
-
-A Django REST Framework-based API for managing therapy sessions, therapists, children, and their progress.
-
-## Features
-
 - User authentication with JWT tokens
 - Role-based access control (Admin, Therapist, Parent)
 - CRUD operations for all entities
 - Automated session scheduling using PuLP
 - Progress tracking for therapy sessions
 
-## Setup
 
-1. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
-
-2. Run migrations:
-```bash
-python manage.py makemigrations
-python manage.py migrate
-```
-
-3. Create a superuser:
-```bash
-python manage.py createsuperuser
-```
-
-4. Run the development server:
-```bash
-python manage.py runserver
-```
 
 ## API Endpoints
 
@@ -100,17 +74,3 @@ The system uses PuLP (Python Linear Programming) to automatically assign therapi
 - No overlapping sessions
 - Optimal assignment
 
-To trigger the scheduler:
-```bash
-curl -X POST http://localhost:8000/api/sessions/schedule_sessions/ \
-     -H "Authorization: Bearer <your_token>"
-```
-
-## Security Considerations
-
-1. Change the `SECRET_KEY` in settings.py before deployment
-2. Set `DEBUG = False` in production
-3. Configure proper CORS settings for production
-4. Use HTTPS in production
-5. Implement rate limiting
-6. Regular security audits 
