@@ -74,3 +74,14 @@ The system uses PuLP (Python Linear Programming) to automatically assign therapi
 - No overlapping sessions
 - Optimal assignment
 
+## This branch will have the UI
+
+For now and for the ease of development, thechonologie that would be used :
+
+- HTML
+- CSS
+- JavaScript
+
+Might Switch to React later , depending on the time left.
+
+
