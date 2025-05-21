@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from .models import Child, Therapist, Session, TherapyProgress
+import uuid
 
 User = get_user_model()
 
@@ -45,6 +46,8 @@ class TherapistSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         user_data = validated_data.pop('user')
+        username = str(uuid.uuid4())[:30]
+        user_data['username'] = username
         user = User.objects.create_user(**user_data)
         therapist = Therapist.objects.create(user=user, **validated_data)
         return therapist
@@ -75,3 +78,34 @@ class TherapyProgressSerializer(serializers.ModelSerializer):
         fields = ('id', 'session', 'session_details', 'assessment',
                   'rating', 'remarks', 'created_at', 'updated_at')
         read_only_fields = ('created_at', 'updated_at')
+
+
+class TherapistRegistrationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['email', 'password', 'first_name', 'last_name']
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def create(self, validated_data):
+        # Auto-generate a unique username
+        username = str(uuid.uuid4())[:30]
+
+        user = User.objects.create_user(
+            username=username,
+            email=validated_data['email'],
+            password=validated_data['password'],
+            first_name=validated_data.get('first_name', ''),
+            last_name=validated_data.get('last_name', ''),
+            user_type='therapist'
+        )
+        Therapist.objects.create(user=user)
+        return user
+
+
+class StudentRegistrationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Child
+        fields = ['first_name', 'last_name', 'date_of_birth', 'parent']
+
+    def create(self, validated_data):
+        return Child.objects.create(**validated_data)

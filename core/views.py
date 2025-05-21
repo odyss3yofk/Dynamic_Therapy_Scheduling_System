@@ -1,4 +1,4 @@
-from rest_framework import viewsets, permissions, status
+from rest_framework import viewsets, permissions, mixins
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django.contrib.auth import get_user_model, authenticate, login, logout
@@ -8,7 +8,7 @@ from django.shortcuts import render, redirect
 from .models import Child, Therapist, Session, TherapyProgress
 from .serializers import (
     UserSerializer, ChildSerializer, TherapistSerializer,
-    SessionSerializer, TherapyProgressSerializer
+    SessionSerializer, TherapyProgressSerializer, TherapistRegistrationSerializer, StudentRegistrationSerializer
 )
 from pulp import *
 
@@ -137,6 +137,22 @@ def login_view(request):
         else:
             messages.error(request, 'Invalid email or password')
     return render(request, 'login.html')
+
+
+class TherapistRegistrationViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
+    queryset = User.objects.filter(user_type='therapist')
+    serializer_class = TherapistRegistrationSerializer
+    permission_classes = [permissions.AllowAny]
+
+
+class StudentRegistrationViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
+    queryset = Child.objects.all()
+    serializer_class = StudentRegistrationSerializer
+    # Only authenticated users (parents) can register
+    permission_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(parent=self.request.user)  # Set the parent
 
 
 @login_required
