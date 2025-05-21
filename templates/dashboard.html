@@ -2,28 +2,105 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Therapy Management</title>
     <style>
-        body { font-family: Arial, sans-serif; background: #222; color: #eee; }
-        .container { max-width: 600px; margin: 60px auto; background: #333; padding: 2em; border-radius: 8px; }
-        a { color: #4CAF50; text-decoration: none; margin-right: 1em; }
-        .logout { float: right; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1e1e2f;
+            color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 60px auto;
+            background-color: #2a2a3d;
+            padding: 2.5em;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2em;
+        }
+
+        .header span {
+            font-weight: 500;
+            font-size: 1.1em;
+        }
+
+        .logout {
+            background: #ff4b5c;
+            color: white;
+            padding: 0.4em 1em;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .logout:hover {
+            background: #e33d4e;
+        }
+
+        h2 {
+            margin-bottom: 1em;
+            font-size: 1.8em;
+            border-bottom: 1px solid #444;
+            padding-bottom: 0.3em;
+        }
+
+        p {
+            color: #ccc;
+            margin-bottom: 1.5em;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 1em;
+        }
+
+        a {
+            color: #4cafaf;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #64ffda;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <div style="overflow: auto;">
+        <div class="header">
             <span>Welcome, {{ user.email }} ({{ user.user_type }})</span>
             <a href="/logout/" class="logout">Logout</a>
         </div>
         <h2>Dashboard</h2>
-        <p>This is a minimal dashboard. You can now build out more features or connect to the API endpoints.</p>
+        <p>This is your therapy management dashboard. You can access different sections of the system below:</p>
         <ul>
-            <li><a href="/admin/">Go to Admin Panel</a></li>
-            <li><a href="/api/children/">View Children (API)</a></li>
-            <li><a href="/api/therapists/">View Therapists (API)</a></li>
-            <li><a href="/api/sessions/">View Sessions (API)</a></li>
+            <li><a href="/admin/">🛠️ Go to Admin Panel</a></li>
+            <li><a href="/api/children/">👶 View Children (API)</a></li>
+            <li><a href="/api/therapists/">🧑‍⚕️ View Therapists (API)</a></li>
+            <li><a href="/api/sessions/">📅 View Sessions (API)</a></li>
         </ul>
     </div>
 </body>
-</html> 
+</html>
